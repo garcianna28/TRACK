@@ -106,6 +106,19 @@ exports.navigate_to_createNewStudent = function (req, res) {
     });
 }
 
+/*exports.navigate_to_classPage = function (req, res) {
+    var students = [];
+
+    Student.find({}, {}, function(err, student) {
+        student.forEach(function(s) { 
+            if(s.period==the period we want)
+            {
+            console.log(s); console.log(s.name); 
+            students.push(s);
+        }
+        });
+    });*/
+
 exports.student_delete = function (req, res) {
     Student.findByIdAndRemove(req.params.id, function (err) {
         if (err) {
