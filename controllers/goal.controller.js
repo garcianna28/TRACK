@@ -74,7 +74,9 @@ exports.goal_delete = function (req, res) {
 /*redirects page to the "create new goal" page, TODO: change function name to something more applicable*/
 exports.navigate_to_createNewGoal = function (req, res) {
     Student.findById(req.params.id, function(err, student) {
-        res.render('pages/createNewGoal');
+        res.render('pages/createNewGoal', {
+            student: student
+        });
         //console.log(req.Student.id);
         /*var path = require('path');
         res.sendFile(path.resolve(__dirname + '/../public/newgoal.html'));//TODO: change path to .ejs file*/
