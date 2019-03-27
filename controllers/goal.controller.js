@@ -79,14 +79,22 @@ exports.navigate_to_goalProfile = async function (req, res) {
             var result = await getgoaldata();
 
             function getgoaldata() {
-                return new Promise(function(err,resolve, reject){
+            new Promise(function(err,resolve, reject){
+                    /*if(err)
+                    {
+                     console.log('hi');
+                     reject(err);
+                    }
+                    else 
+                    {*/
                 res.render('pages/goalProfile', {
                 goalDatas: goalDatas,
                 student: student,
                 goal: goal,
-                methodOfCollection: goal.methodOfCollection
+                methodOfCollection: goal.methodOfCollection });
+                  //}
             });
-            });
+
             }
 
             //console.log(result);
