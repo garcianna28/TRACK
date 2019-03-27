@@ -79,7 +79,7 @@ exports.navigate_to_goalProfile = async function (req, res) {
             var result = await getgoaldata();
 
             function getgoaldata() {
-            new Promise(function(err,resolve, reject){
+            //new Promise(function(err,resolve, reject){
                     /*if(err)
                     {
                      console.log('hi');
@@ -93,7 +93,7 @@ exports.navigate_to_goalProfile = async function (req, res) {
                 goal: goal,
                 methodOfCollection: goal.methodOfCollection });
                   //}
-            });
+            //});
 
             }
 
