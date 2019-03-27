@@ -40,7 +40,7 @@ exports.goal_create = function (req, res) {
 };
 
 /* renders goal page */
-exports.navigate_to_goalProfile = function (req, res) {
+exports.navigate_to_goalProfile = async function (req, res) {
     goalDatas = [];
 
     GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
@@ -61,7 +61,7 @@ exports.navigate_to_goalProfile = function (req, res) {
             res.send(err);
             return;
         }
-        Goal.findById(req.params.goalid, function(err, goal) {
+        Goal.findById(req.params.goalid, async function(err, goal) {
             //console.log(goal.methodOfCollection);
             //console.log(goal);
             console.log(err);
@@ -72,17 +72,30 @@ exports.navigate_to_goalProfile = function (req, res) {
             }
             //console.log(goal);
             //console.log("not broken yet");
-            res.render('pages/goalProfile', {
+            console.log('calling');
+                //var result = await ();
+
+                //console.log(result);
+            var result = await getgoaldata();
+
+            function getgoaldata() {
+                return new Promise(function(err,resolve, reject){
+                res.render('pages/goalProfile', {
                 goalDatas: goalDatas,
                 student: student,
                 goal: goal,
                 methodOfCollection: goal.methodOfCollection
             });
+            });
+            }
+
+            //console.log(result);
         });
     });
     //console.log("pls workmaybe");
     return;
 }
+
 
 /*deletes goal from database*/
 exports.goal_delete = function (req, res) {
@@ -104,3 +117,11 @@ exports.navigate_to_createNewGoal = function (req, res) {
         });
     });
 };
+
+/*function resolveAfter2Seconds() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve('resolved');
+    }, 2000);
+  });
+}*/
