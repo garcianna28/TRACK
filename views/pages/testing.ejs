@@ -16,6 +16,14 @@ input {
 	    <% users.forEach(function(user) { %>
 	    	<p> <%=user%> </p>
 		<% }); %>
+
+		<% goals.forEach(function(goal) { %>
+			<p> <%=goal.methodOfCollection%> </p>
+		<% }); %>
+
+		<% methodsOfCollection.forEach(function(method) { %>
+			<p> <%=method%> </p>
+		<% }); %>
 	</div>
 
 

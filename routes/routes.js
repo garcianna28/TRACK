@@ -8,6 +8,8 @@ const goaldata_controller = require('../controllers/goaldata.controller');
 const misc_controller = require('../controllers/misc.controller');
 const user_controller = require('../controllers/user.controller')
 const Student = require('../models/student.model');
+const GoalData = require('../models/goaldata.model');
+const Goal = require('../models/goal.model');
 
 //TODO: figure out the real difference between router.post and router.get
 router.post('/student/create', student_controller.student_create); //adds new student to database
@@ -53,7 +55,7 @@ router.get('/logout', (req, res) => {
 
 
 router.get('/testing', (req, res) => {
-	/*
+
 	async function getFirstUser() {
 	    try {
 	        let users = await getUsers();
@@ -66,13 +68,30 @@ router.get('/testing', (req, res) => {
 	}
 
 	function getUsers() {
+
+		goals = [];
+		methodsOfCollection = [];
+
+		console.log("goals: " + goals);
+		Goal.find({}, {}, function(err, goal) {
+		    goal.forEach(function(s) { 
+	            goals.push(s);
+	            console.log("s.meth: " + s.methodOfCollection);
+	            methodsOfCollection.push(s.methodOfCollection);
+	        });
+		});
+			  
+		console.log("methodsfinal: " + methodsOfCollection);
+
 		res.render('./pages/testing.ejs', {
-			users: ["user1", "user2"]
+			users: ["user1", "user2"],
+			goals: goals,
+			methodsOfCollection: methodsOfCollection
 		});
 	}
 
-	getFirstUser();*/
-
+	getFirstUser();
+/*
 	return Promise.try(() => {
         return db("vegetables").limit(3);
     }).map((row) => {
@@ -82,7 +101,7 @@ router.get('/testing', (req, res) => {
             vegetables: vegetables
         });
     });
-
+*/
 /*
 	var students = [];
 	Student.find({}, {}, function(err, student) {

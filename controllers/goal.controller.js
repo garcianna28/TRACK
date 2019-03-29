@@ -46,48 +46,69 @@ exports.goal_create = function (req, res) {
 
 /* renders goal page */
 exports.navigate_to_goalProfile = function (req, res) {
-    try {
+
         goalDatas = [];
+        var student;
+        var goal;
+        var methodsOfCollection;
 
-        GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
-            if (err) {
-                res.send(err);
-                return;
-            }
-            goaldata.forEach(function(s) { 
-                goalDatas.push(s);
-            });
-        });
-
-
-        Student.findById(req.params.id, function(err, student) {
-            //console.log(err);
-            if (err) {
-                //console.log(err);
-                res.send(err);
-                return;
-            }
-
-
-            Goal.findById(req.params.goalid, function(err, goal) {
-                var methodsOfCollection = goal.methodOfCollection;
-                console.log("method:" + goal.methodOfCollection);
-                console.log("method as var:" + methodsOfCollection);
-                console.log("goal:" + goal);
-                res.render('pages/goalProfile', {
-                    goalDatas: goalDatas,
-                    student: student,
-                    goal: goal,
-                    methodOfCollection: methodsOfCollection
+        function loadData() {
+            GoalData.find({goalID: req.params.goalid}, {}, function(err, goaldata) {
+                if (err) {
+                    res.send(err);
+                    return;
+                }
+                goaldata.forEach(function(s) { 
+                    goalDatas.push(s);
                 });
             });
+            Student.findById(req.params.id, function(err, student) {
+                student = student;
+                //console.log(err);
+                if (err) {
+                    //console.log(err);
+                    res.send(err);
+                    return;
+                }
+                Goal.findById(req.params.goalid, function(err, goal) {
+                    goal = goal;
+                    methodsOfCollection = goal.methodOfCollection;
+                    console.log("method:" + goal.methodOfCollection);
+                    console.log("method as var:" + methodsOfCollection);
+                    console.log("goal:" + goal);
+                    return;
+                });
+            });
+        }
+
+        
+    async function renderGoalProfile() {
+        try {
+            let testing = await loadData();
+            return rendering();
+        } catch (err) {
+            console.log("err during rendering: " + err);
+            return {
+
+            };
+        }
+    }
+
+    function rendering() {
+        console.log("FINAL RENDER DATA: ");
+        console.log("goaldatas: " + goalDatas);
+        console.log("student: " + student);
+        console.log("goal: " + goal);
+        res.render('pages/goalProfile', {
+            goalDatas: goalDatas,
+            student: student,
+            goal: goal,
+            methodOfCollection: methodsOfCollection
         });
         //console.log("pls workmaybe");
-        return;
-    } catch(error) {
-        console.log("err:" + err);
-        res.render('./error');
     }
+
+    renderGoalProfile();
 }
 
 /*deletes goal from database*/
