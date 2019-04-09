@@ -47,8 +47,26 @@
       <option value="9">9</option>
       <option value="10">10</option>
     </select><br><br>
-    <input type="submit" value="Submit" class="submitButton"><br><br>
+    <input type="submit" value="Submit" class="submitButton" onclick="return confirm('Are you sure you want to add this student?')"/><br><br>
   </form>
   <a href="/classPage" class="backButton"></a>
 </body>
 </html>
+
+<script>
+
+function confirmation() {
+  //confirm("Are you sure you want to add this student?");
+         if (confirm("Are you sure you want to add this student?")) {
+           yourformelement.submit();
+       } else {
+           return false;
+       }
+  /*var txt;
+  if (confirm("Press a button!")) {
+    txt = "You pressed OK!";
+  } else {
+    txt = "You pressed Cancel!";
+  }*/
+}
+</script>

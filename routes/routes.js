@@ -72,7 +72,7 @@ router.get('/testing', (req, res) => {
 	}
 
 	getFirstUser();*/
-
+/*
 	return Promise.try(() => {
         return db("vegetables").limit(3);
     }).map((row) => {
@@ -81,9 +81,9 @@ router.get('/testing', (req, res) => {
         res.render("testing", {
             vegetables: vegetables
         });
-    });
+    });*/
 
-/*
+
 	var students = [];
 	Student.find({}, {}, function(err, student) {
             student.forEach(function(s) { 
@@ -93,7 +93,7 @@ router.get('/testing', (req, res) => {
 	res.render('./pages/testing.ejs', {
 		students: students,
 		test: ["test1", "test2"]
-	})*/
+	})
 });
 
 router.get('/userfile', (req, res) => {

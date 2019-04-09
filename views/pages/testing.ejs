@@ -11,12 +11,23 @@ input {
 }
 </style>
 <body>
-	
-	<div>
-	    <% users.forEach(function(user) { %>
-	    	<p> <%=user%> </p>
-		<% }); %>
-	</div>
+
+	<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+  var txt;
+  if (confirm("Press a button!")) {
+    txt = "You pressed OK!";
+  } else {
+    txt = "You pressed Cancel!";
+  }
+  document.getElementById("demo").innerHTML = txt;
+}
+</script>
+
 
 
 	<p>Select a maintenance drone:</p>
